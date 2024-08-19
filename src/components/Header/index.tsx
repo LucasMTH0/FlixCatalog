@@ -1,82 +1,31 @@
+import { MagnifyingGlass, Popcorn } from "@phosphor-icons/react";
+import { ButtonSearch, Container, InputSearch, NavContainer } from "./styles";
 import { useState } from "react";
-
 export function Header() {
-    //const navigate = useNavigate()
-    const [isSearchEnabled, setIsSearchEnabled] = useState(false)
-    // const [searchMovieText, setSearchMovieText] = useState('')
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
-    // function redirectToPage(){
-    //     toggleMenuOpen()
-    //     navigate(url)
-    // }
+    const [isSearchEnabled, setIsSearchEnabled] = useState(false);
+    const [searchText, setSearchText] = useState('');
 
-    function toggleMenuOpen(){
-        setIsMenuOpen(!isMenuOpen)
-    }
-
-
-    // function searchMovie() {
-
-    // }
-
-    function toggleSearchButton(){
-        if(!isSearchEnabled){
-            setIsSearchEnabled(true)
-        } else {
-            // if(searchMovieText.length === 0){
-            //     setIsSearchEnabled(false)
-            // } else {
-            //     searchMovie()
-            // }
-            
+    function handleSearch(){
+        if(isSearchEnabled == false){
+            setIsSearchEnabled(true);
+        } else if(searchText.length == 0){
+            setIsSearchEnabled(false);
         }
+        console.log(searchText);
     }
 
     return (
-        <aside>
-            {
-                !isMenuOpen 
-                && 
-                <button onClick={toggleMenuOpen}>
-                    <span className="material-symbols-outlined">
-                        menu
-                    </span>
-                </button>
-            }
-
-            {
-                isMenuOpen
-                &&
-                <header>
-                <button onClick={toggleMenuOpen}>
-                    <span className="material-symbols-outlined">
-                        close
-                    </span>
-                </button>
-                <nav>
-                    {/* <li onClick={() => redirectToPage('/')}>
-                        Home
-                    </li>
-                    <li onClick={() => redirectToPage('/movies')}>
-                        Movies
-                    </li> */}
-
-                    <li>
-                        {
-                            isSearchEnabled && <input type="search" />
-                        }
-                        
-                        <button onClick={toggleSearchButton}>
-                            <span className="material-symbols-outlined">
-                                search
-                            </span>
-                        </button>
-                    </li>
-                </nav>
-            </header>
-            }
-
-        </aside>
+        <Container>
+            <Popcorn size={32} />
+            <NavContainer>
+                <span>Filmes</span>
+                <span>Séries</span>
+            </NavContainer>
+            { isSearchEnabled && <InputSearch onChange={({target}) => setSearchText(target.value)} placeholder="Buscar por..." /> }
+            <ButtonSearch onClick={handleSearch}>
+                <MagnifyingGlass  size={32} />
+            </ButtonSearch>
+        </Container>
 
     )
 }
