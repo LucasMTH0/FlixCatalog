@@ -1,0 +1,15 @@
+.movie:hover .overview {
+  transform: translateY(0);
+}
+
+.medium_note {
+  color: yellow;
+}
+
+.hight_note {
+  color: green;
+}
+
+.low_note {
+  color: red;
+}

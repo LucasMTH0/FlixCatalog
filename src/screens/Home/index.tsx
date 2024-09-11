@@ -1,49 +1,94 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useTransition } from "react"
 import { Movie } from "../../interfaces/Movie"
 import { Card } from "../../components/Card"
-import { Container, MovieWrapper } from "./styles"
-import { getLatestMovies, getRelatedMovies } from "../../services/api"
+import { Container,  Wrapper } from "./styles"
+import { Loading } from "../../components/Loading"
+import { getAPIList } from "../../services/api"
+import { SliderContainer } from "../../components/SliderContainer"
+import { SliderCardItem } from "../../components/slider"
 
 export function Home() {
-    const [relatedMovies, setRelatedMovies] = useState([])
-    const [latestMovies, setLatestMovies] = useState([])
+    const [ratedMovies, setRatedMovies] = useState([])
+    const [ratedTVSeries, setRatedTVSerie] = useState([])
+    const [upcomingMovies, setUpcomingMovies] = useState([])
+    const [ isPending, startTransition] = useTransition()
 
-    async function loadRelatedMovies() {
-        const {data} = await getRelatedMovies()
-        setRelatedMovies(data.results)
+    async function getUpcomingMovies(){
+        const {data} = await getAPIList({ category: "movie", filter: "upcoming"})
+        setUpcomingMovies(data.results)
     }
-
-    async function loadLatestMovies() {
-        const {data} = await getLatestMovies()
-        setLatestMovies(data.results)
+    async function getRelatedMovies() {
+        const {data} = await getAPIList({ category: "movie", filter: "top_rated"})
+        setRatedMovies(data.results)
     }
-
+    async function getRatedSeries() {
+        const {data} = await getAPIList({ category: "tv", filter: "top_rated"})
+        setRatedTVSerie(data.results)
+    }
 
     useEffect(() => {
-        loadRelatedMovies()
-        loadLatestMovies()
+        startTransition(() => {
+            getUpcomingMovies()
+            getRelatedMovies()
+            getRatedSeries()
+        })
     }, [])
 
     return (
         <Container>
-            <MovieWrapper>
-                {
-                    relatedMovies.map((movie: Movie) => {
-                        return (
-                            <Card movieContent={movie} key={movie.id}/>
-                        )
-                    })
-                }
-            </MovieWrapper>
-            {/* <MovieWrapper>
-                {
-                    latestMovies.map((movie: Movie) => {
-                        return (
-                            <Card movieContent={movie} key={movie.id}/>
-                        )
-                    })
-                }
-            </MovieWrapper> */}
+            {
+                isPending ?
+                <Loading/>
+                :
+                <>
+                    <Wrapper>
+                        <h1>Filmes recentes</h1>
+                        <SliderContainer>
+                            {
+                                upcomingMovies.map((movie: Movie) => {
+                                    return (
+                                        <SliderCardItem>
+                                            <Card movieContent={movie} type="movie"/>
+                                        </SliderCardItem>
+                                    )
+                                })
+                            }
+                        </SliderContainer >
+                    </Wrapper>
+
+                    <Wrapper>
+                        <h1>Filme mais bem avaliados</h1>
+                        <SliderContainer>
+                            {
+                                ratedMovies.map((movie: Movie) => {
+                                    return (
+                                        <SliderCardItem>
+                                            <Card movieContent={movie} type="movie"/>
+                                        </SliderCardItem>
+                                    )
+                                })
+                            }
+                        </SliderContainer >
+                    </Wrapper>
+
+                    <Wrapper>
+                        <h1>Séries mais bem avaliadas</h1>
+                        <SliderContainer>
+                            {
+                                ratedTVSeries.map((movie: Movie) => {
+                                    return (
+                                        <SliderCardItem>
+                                            <Card movieContent={movie} type="tv"/>
+                                        </SliderCardItem>
+                                    )
+                                })
+                            }
+                        </SliderContainer>
+                    </Wrapper>
+                </>
+
+            }
+
         </Container>
     )
 }
