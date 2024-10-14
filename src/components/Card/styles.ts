@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 21.25rem;
-    height: 28.75rem;
     border-radius: 6px;
     overflow: hidden;
     cursor: pointer;
@@ -52,5 +50,23 @@ export const Overview = styled.div`
 
     h1 {
         text-align: center;
+    }
+    @media screen and (max-width <= 768px) {
+        & {
+            max-height: 100%;
+            padding: 0 !important;
+        }
+        h1{
+            font-size: 12px !important;
+        }
+
+    }
+`
+
+export const MovieDescription = styled.span`
+    font-size: 1rem;
+    @media screen and (width <= 768px) {
+        font-size: .75rem;
+        text-align: justify;
     }
 `

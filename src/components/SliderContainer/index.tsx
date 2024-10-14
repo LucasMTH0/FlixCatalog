@@ -10,7 +10,7 @@ export function SliderContainer({ children }: Props) {
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
-        centerPadding: "80px",
+        centerPadding: "10px",
         nextArrow: <Arrow />,
         prevArrow: <Arrow />,
         responsive: [
@@ -34,8 +34,8 @@ export function SliderContainer({ children }: Props) {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToShow: 2,
+                    slidesToScroll: 2
                 }
             }
         ]

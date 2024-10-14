@@ -9,12 +9,12 @@ export interface Movie {
     original_title: string;
     tagline: string;
     created_by: [];
-    first_air_date: [];
+    first_air_date:  string;
     overview: string;
     popularity: number;
     poster_path: string; 
     runtime: number;
-    release_date: string;
+    release_date?: string;
     title: string;
     name: string;
     video: boolean;

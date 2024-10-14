@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.header`
+    z-index: 1;
     width: 100%;
     height: 5rem;
     gap: 18px;

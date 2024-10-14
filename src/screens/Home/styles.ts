@@ -19,3 +19,11 @@ export const Wrapper = styled.div`
     flex-direction: column;
     margin-block: 1rem;
 `
+
+export const SliderTitle = styled.h1`
+    @media screen and (width <= 768px){
+        &{
+            text-align: center;
+        }
+    }
+`

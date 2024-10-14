@@ -14,18 +14,43 @@ export const WrapperImage = styled.div`
 export const HeaderImage = styled.div<{ $imageUrl: string}>`
     width: 100%;
     height: 100vh;
+    padding-top: 1.5rem;
+
     background-image: url( ${ props => props.$imageUrl });
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
+
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
-    padding: 20px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+    }
+
+    @media (width <= 768px){
+        & {
+            margin-bottom: 6rem;
+            padding-top: 3rem;
+        }
+    }
 `
 
 export const HeaderWrapper = styled.div`
+    z-index: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 2rem;
     gap: 1rem;
     max-width: 600px;
@@ -33,6 +58,7 @@ export const HeaderWrapper = styled.div`
 export const MovieContainerDetails = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
 `
 
 export const MovieGenre = styled.span`
@@ -43,6 +69,9 @@ export const MovieGenre = styled.span`
     margin: 10px 5px;
     background: transparent;
     backdrop-filter: blur(10px);
+    @media screen and (max-width <= 768px) {
+        font-size: 8px;
+    }
 `
 
 export const Image = styled.img`
@@ -101,7 +130,28 @@ export const Video = styled.iframe`
     background: transparent;
     border: 0;
     border-radius: 5px;
-    width: 620px;  
-    height: 400px;
+    min-width: 600px;
+    min-height: 350px;
+    width: 100%;
+    height: 100%;
     box-shadow: none!important;
+    @media screen and (width <= 768px){
+        & {
+            min-width: 100px;
+            max-width: 100% !important;
+            width: 100% !important;
+            padding: 0;
+            margin: 0;
+        }
+    }
+`
+
+
+export const SliderTitle = styled.h1`
+
+    @media screen and (width <= 768px){
+        & {
+            text-align: center;
+        }
+    }
 `
