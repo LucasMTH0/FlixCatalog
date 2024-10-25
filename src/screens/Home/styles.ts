@@ -1,29 +1,11 @@
 import styled from "styled-components";
 
-
-
 export const Container = styled.section`
-    padding-top: 5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
     height: 100vh;
     max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
-
-export const Wrapper = styled.div`
-    max-width: 1650px;
-    width: 100%;
-    gap: 1rem;
-    display: flex;
-    flex-direction: column;
-    margin-block: 1rem;
-`
-
-export const SliderTitle = styled.h1`
-    @media screen and (width <= 768px){
-        &{
-            text-align: center;
-        }
-    }
+    padding-top: 5rem;
 `

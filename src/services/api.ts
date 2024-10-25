@@ -15,7 +15,12 @@ export function getResultById(id: string, type: string) {
 export function getAPIList(category: string, filter: string) {
   return API.get(`/${category}/${filter}?language=${LANGUAGE}`, {
     headers: HEADERS,
-  });
+  })
+}
+
+export async function getFilteredResultsList(type, filter){
+  const { data } = await getAPIList(type, filter);
+  return data.results
 }
 
 //https://api.themoviedb.org/3/movie/latest
