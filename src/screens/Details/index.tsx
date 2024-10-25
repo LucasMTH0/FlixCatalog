@@ -4,7 +4,7 @@ import { getMoviesByGenre } from "../../services/movies";
 import { formatDate } from "../../services/formatValues";
 import { Movie } from "../../interfaces/Movie";
 import { useParams } from "react-router-dom";
-import { startTransition, useEffect, useState, useTransition } from "react";
+import {  useEffect, useState, useTransition } from "react";
 import {
   MovieContainerDetails,
   HeaderWrapper,
